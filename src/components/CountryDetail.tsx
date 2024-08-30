@@ -34,7 +34,7 @@ const CountryDetail: React.FC<CountryDetailProps> = ({ country }) => {
         <img
           src={country.flags.png}
           alt={`Flag of ${country.name.common}`}
-          className="img-fluid flag"
+          className="img-fluid "
         />
       </div>
     </div>

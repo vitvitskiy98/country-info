@@ -41,8 +41,6 @@
   color: #888;
 }
 
-
-
 .component-container {
   height: 100%;
   display: flex;
@@ -66,10 +64,8 @@
   overflow-y: auto;
 }
 
-
-
 .country-detail {
-  background-color: white;
+  background-color: rgba(193, 194, 192, 0.1);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -88,4 +84,3 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-

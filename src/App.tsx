@@ -20,7 +20,9 @@ interface Country {
 
 const App: React.FC = () => {
   const [countries, setCountries] = useState<Country[]>([]);
+  const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     axios
@@ -30,6 +32,7 @@ const App: React.FC = () => {
           a.name.common.localeCompare(b.name.common)
         );
         setCountries(sortedCountries);
+        setFilteredCountries(sortedCountries);
         if (sortedCountries.length > 0) {
           setSelectedCountry(sortedCountries[0]);
         }
@@ -39,18 +42,38 @@ const App: React.FC = () => {
       });
   }, []);
 
+  useEffect(() => {
+    const filtered = countries.filter((country) =>
+      country.name.common.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredCountries(filtered);
+  }, [searchQuery, countries]);
+
   return (
     <div className="container mt-5">
       <h1 className="mb-4">Countries App</h1>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search for a country..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
       <div className="row">
         <div className="col-md-6">
-          <CountriesList
-            countries={countries}
-            onSelectCountry={setSelectedCountry}
-          />
+          <div className="component-container">
+            <CountriesList
+              countries={filteredCountries}
+              onSelectCountry={setSelectedCountry}
+            />
+          </div>
         </div>
         <div className="col-md-6">
-          {selectedCountry && <CountryDetail country={selectedCountry} />}
+          <div className="component-container">
+            {selectedCountry && <CountryDetail country={selectedCountry} />}
+          </div>
         </div>
       </div>
     </div>
