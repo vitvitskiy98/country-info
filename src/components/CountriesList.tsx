@@ -17,7 +17,7 @@ const CountriesList: React.FC<CountriesListProps> = ({
   onSelectCountry,
 }) => {
   return (
-    <div>
+    <div className="countries-list">
       <h2>Countries List</h2>
       <ul className="list-group">
         {countries.map((country) => (

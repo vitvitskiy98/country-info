@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CountriesList from "./components/CountriesList";
 import CountryDetail from "./components/CountryDetail";
@@ -25,10 +26,12 @@ const App: React.FC = () => {
     axios
       .get<Country[]>("https://restcountries.com/v3.1/all")
       .then((response) => {
-        setCountries(response.data);
-        // Выбираем первую страну из списка
-        if (response.data.length > 0) {
-          setSelectedCountry(response.data[0]);
+        const sortedCountries = response.data.sort((a, b) =>
+          a.name.common.localeCompare(b.name.common)
+        );
+        setCountries(sortedCountries);
+        if (sortedCountries.length > 0) {
+          setSelectedCountry(sortedCountries[0]);
         }
       })
       .catch((error) => {

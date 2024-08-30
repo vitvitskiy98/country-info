@@ -18,7 +18,7 @@ interface CountryDetailProps {
 
 const CountryDetail: React.FC<CountryDetailProps> = ({ country }) => {
   return (
-    <div>
+    <div className="country-detail">
       <h2>Country Details</h2>
       <h3>{country.name.common}</h3>
       <p>
@@ -30,11 +30,13 @@ const CountryDetail: React.FC<CountryDetailProps> = ({ country }) => {
       <p>
         <strong>Population:</strong> {country.population}
       </p>
-      <img
-        src={country.flags.png}
-        alt={`Flag of ${country.name.common}`}
-        className="img-fluid"
-      />
+      <div className="flag-container">
+        <img
+          src={country.flags.png}
+          alt={`Flag of ${country.name.common}`}
+          className="img-fluid flag"
+        />
+      </div>
     </div>
   );
 };
